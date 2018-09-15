@@ -43,10 +43,6 @@ server.route({
   method: "GET",
   path: "/block/{BLOCK_HEIGHT}",
   handler: async (request, h) => {
-    if (typeof request.params.BLOCK_HEIGHT !== 'number') {
-      return Boom.badRequest();
-    }
-
     let blockInfo = await blockchain.getBlock(request.params.BLOCK_HEIGHT);
 
     if (blockInfo) {
@@ -66,11 +62,11 @@ server.route({
     if(!body.length){
       return Boom.preconditionFailed("Request body cannot be empty!");
     }
-    
+
     try {
       let newBlock = new Block(body);
       let blockData = await blockchain.addBlock(newBlock);
-      return h.response({ blockData }).created();
+      return h.response( blockData ).created();
     } catch (err) {
       return Boom.badRequest(err);
     }
