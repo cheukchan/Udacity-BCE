@@ -63,6 +63,63 @@ class Blockchain {
     return data.hash;
   }
 
+  findBlocksByAddress(address) {
+    return new Promise(
+      (resolve, err) => {
+        let i = 0;
+        let results = []
+        db.createReadStream()
+          .on("data", data => {
+            console.log(data.key, "=", data.value);
+            console.log(data.value.body.address)
+            console.log(address)
+            if(data.value.body.address === address){
+              results.push(data.value)
+              console.log('hi')
+            }
+          })
+          .on("error", err => {
+            return console.log("Unable to read data stream!", err);
+          })
+          .on("close", () => {
+            //console.log("Block #" + i);
+            resolve(results);
+          });
+      },
+      err => {
+        reject("Iam the error", err);
+      }
+    );
+  }
+
+  findBlocksByHash(hash) {
+    return new Promise(
+      (resolve, reject) => {
+        let i = 0;
+        db.createReadStream()
+          .on("data", data => {
+            console.log(data.key, "=", data.value);
+            console.log('hash' + data.value.hash)
+            console.log(hash)
+            if(data.value.hash === hash){
+              resolve(data.value);
+            }
+          })
+          .on("error", err => {
+            return console.log("Unable to read data stream!", err);
+          })
+          .on("close", () => {
+            //console.log("Block #" + i);
+            resolve(null);
+          });
+      },
+      err => {
+        reject("Iam the error", err);
+      }
+    );
+  }
+
+
   async validateBlock(blockHeight) {
     // get block object
     let block = await this.getBlock(blockHeight);
