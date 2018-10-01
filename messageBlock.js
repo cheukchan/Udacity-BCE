@@ -47,6 +47,10 @@ class MessageChain {
       }
     );
   }
+
+  deleteValidatedMessage(address) {
+    db.del(address)
+  }
 }
 
 ///outside of class
