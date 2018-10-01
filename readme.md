@@ -132,74 +132,59 @@ Node version 8 and up
   - GET http://localhost:8000/address:{address}
  This endpoint will return all the stars registered under the address provide in the params in an array format. Each object in the array returns as information regarding the block information, such as block height, created timestamp and address which associated with who signed the message.    
 #### Example response body with 201 response code
-[
-    {
-        "hash": "a2ca24dde810b1d9fd7f75fdb18b8d3718edc4af5ba234ff01beb22dab07db0e",
-        "height": 1,
-        "body": {
-            "address": "msK5TkH3qg6PFt4vCpdchZCRehzsChjFNH",
-            "star": {
-                "dec": "-26° 29 ",
-                "ra": "16h 29m 1.0s",
-                "story": "466f756e642073746172207573696e672068747470733a2f2f7777772e676f6f676c652e636f6d2f736b792f"
-            }
-        },
-        "time": "1538004334",
-        "previousBlockHash": "7aa8d8f073dd6a55ab17eb2f220ca3f6e7deac7e269cb9f737bf826817cc32c9"
-    },
-    {
-        "hash": "9a1308b64b5191419993ad2a755850a580408f22d2cecbf0483e18f149c289ee",
-        "height": 2,
-        "body": {
-            "address": "msK5TkH3qg6PFt4vCpdchZCRehzsChjFNH",
-            "star": {
-                "dec": "-26° 29 ",
-                "ra": "16h 29m 1.0s",
-                "story": "466f756e642073746172207573696e672068747470733a2f2f7777772e676f6f676c652e636f6d2f736b792f203232323232"
-            }
-        },
-        "time": "1538004659",
-        "previousBlockHash": "a2ca24dde810b1d9fd7f75fdb18b8d3718edc4af5ba234ff01beb22dab07db0e"
-    }
-]
+      [
+      {
+            "hash": "a2ca24dde810b1d9fd7f75fdb18b8d3718edc4af5ba234ff01beb22dab07db0e",
+            "height": 1,
+            "body": {
+                  "address": "msK5TkH3qg6PFt4vCpdchZCRehzsChjFNH",
+                  "star": {
+                  "dec": "-26° 29 ",
+                  "ra": "16h 29m 1.0s",
+                  "story": "466f756e642073746172207573696e672068747470733a2f2f7777772e676f6f676c652e636f6d2f736b792f"
+                  }
+            },
+            "time": "1538004334",
+            "previousBlockHash": "7aa8d8f073dd6a55ab17eb2f220ca3f6e7deac7e269cb9f737bf826817cc32c9"
+      },
+      {
+            "hash": "9a1308b64b5191419993ad2a755850a580408f22d2cecbf0483e18f149c289ee",
+            "height": 2,
+            "body": {
+                  "address": "msK5TkH3qg6PFt4vCpdchZCRehzsChjFNH",
+                  "star": {
+                  "dec": "-26° 29 ",
+                  "ra": "16h 29m 1.0s",
+                  "story": "466f756e642073746172207573696e672068747470733a2f2f7777772e676f6f676c652e636f6d2f736b792f203232323232"
+                  }
+            },
+            "time": "1538004659",
+            "previousBlockHash": "a2ca24dde810b1d9fd7f75fdb18b8d3718edc4af5ba234ff01beb22dab07db0e"
+      }
+      ]
  - Return 200 if the block is created and added to the blockchain successfully 
  - Return 400 if the block is not created or not added to the blockchain
  - Return 412 if the request body is empty
  - Return 500 if the request body key is incorrect
 
    - GET http://localhost:8000/hash:{hash}
- This endpoint will return all the stars registered under the address provide in the params in an array format. Each object in the array returns as information regarding the block information, such as block height, created timestamp and address which associated with who signed the message.    
+ This endpoint will return hash the assoicated with the hash in the params. It is same the object as the GET /address:{address}. 
 #### Example response body with 201 response code
-[
-    {
-        "hash": "a2ca24dde810b1d9fd7f75fdb18b8d3718edc4af5ba234ff01beb22dab07db0e",
-        "height": 1,
-        "body": {
-            "address": "msK5TkH3qg6PFt4vCpdchZCRehzsChjFNH",
-            "star": {
-                "dec": "-26° 29 ",
-                "ra": "16h 29m 1.0s",
-                "story": "466f756e642073746172207573696e672068747470733a2f2f7777772e676f6f676c652e636f6d2f736b792f"
-            }
-        },
-        "time": "1538004334",
-        "previousBlockHash": "7aa8d8f073dd6a55ab17eb2f220ca3f6e7deac7e269cb9f737bf826817cc32c9"
-    },
-    {
-        "hash": "9a1308b64b5191419993ad2a755850a580408f22d2cecbf0483e18f149c289ee",
-        "height": 2,
-        "body": {
-            "address": "msK5TkH3qg6PFt4vCpdchZCRehzsChjFNH",
-            "star": {
-                "dec": "-26° 29 ",
-                "ra": "16h 29m 1.0s",
-                "story": "466f756e642073746172207573696e672068747470733a2f2f7777772e676f6f676c652e636f6d2f736b792f203232323232"
-            }
-        },
-        "time": "1538004659",
-        "previousBlockHash": "a2ca24dde810b1d9fd7f75fdb18b8d3718edc4af5ba234ff01beb22dab07db0e"
-    }
-]
+      {
+            "hash": "9a1308b64b5191419993ad2a755850a580408f22d2cecbf0483e18f149c289ee",
+            "height": 2,
+            "body": {
+                  "address": "msK5TkH3qg6PFt4vCpdchZCRehzsChjFNH",
+                  "star": {
+                  "dec": "-26° 29 ",
+                  "ra": "16h 29m 1.0s",
+                  "story": "466f756e642073746172207573696e672068747470733a2f2f7777772e676f6f676c652e636f6d2f736b792f203232323232"
+                  }
+            },
+            "time": "1538004659",
+            "previousBlockHash": "a2ca24dde810b1d9fd7f75fdb18b8d3718edc4af5ba234ff01beb22dab07db0e"
+      }
+
  - Return 200 if the block is created and added to the blockchain successfully 
  - Return 400 if the block is not created or not added to the blockchain
  - Return 412 if the request body is empty

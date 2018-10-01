@@ -18,9 +18,35 @@ class MessageChain {
 
   async getBlock(blockHeight) {
     const data = await getLevelDBData(blockHeight);
-    return await data;
+    return data;
   }
 
+  findMessageData(address) {
+    return new Promise(
+      (resolve, reject) => {
+        let i = 0;
+        db.createReadStream()
+          .on("data", data => {
+            console.log(data.key, "=1", data.value);
+            console.log('hash' + data.value.address)
+            console.log(address)
+            if(data.key === address){
+              resolve(data.value);
+            }
+          })
+          .on("error", err => {
+            return console.log("Unable to read data stream!", err);
+          })
+          .on("close", () => {
+            //console.log("Block #" + i);
+            resolve(null);
+          });
+      },
+      err => {
+        reject("Iam the error", err);
+      }
+    );
+  }
 }
 
 ///outside of class

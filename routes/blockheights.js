@@ -1,11 +1,5 @@
+const { Blockchain } = require("../blockchain");
 
-const {
-    Blockchain,
-    readStream,
-    getBlockHeight,
-    getLevelDBData
-  } = require("../blockchain");
-  
 const blockchain = new Blockchain();
 
 exports.plugin = {
