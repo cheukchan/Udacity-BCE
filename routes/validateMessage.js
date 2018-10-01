@@ -4,9 +4,7 @@ const bitcoinMessage = require('bitcoinjs-message')
 
 const { Blockchain } = require("../blockchain");
 const { MessageChain } = require("../messageBlock");
-const { Block } = require("../block")
 
-const blockchain = new Blockchain();
 const messageChain = new MessageChain();
 
 exports.plugin = {
@@ -22,8 +20,7 @@ exports.plugin = {
                     signature: request.payload.signature
                 }
                 const messageData = await messageChain.findMessageData(messageSignature.address)
-                console.log(messageData, "!@#@!#@!#")
-
+                
                 if(messageData.hasOwnProperty('registerStar')){
                     return Boom.boomify(new Error ('The address you entered has already verified'), { statusCode: 409 })
                 }

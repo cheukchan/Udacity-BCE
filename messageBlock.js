@@ -1,6 +1,4 @@
 const level = require("level");
-const SHA256 = require("crypto-js/sha256");
-var { Block } = require("./block");
 
 const chainDB = "./messageData";
 
@@ -48,7 +46,7 @@ class MessageChain {
     );
   }
 
-  deleteValidatedMessage(address) {
+  findAndDeleteMessage(address) {
     db.del(address)
   }
 }
