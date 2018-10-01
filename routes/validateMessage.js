@@ -20,7 +20,7 @@ exports.plugin = {
                     signature: request.payload.signature
                 }
                 const messageData = await messageChain.findMessageData(messageSignature.address)
-                
+
                 if(messageData.hasOwnProperty('registerStar')){
                     return Boom.boomify(new Error ('The address you entered has already verified'), { statusCode: 409 })
                 }
@@ -47,7 +47,7 @@ exports.plugin = {
                     registerStar: true,
                     status: {
                         address: messageData.address,
-                        requestTimestamp: messageData.requestTimestamp,
+                        requestTimestamp: 300 - (currentTimestamp - messageData.requestTimestamp),
                         message: messageData.message,
                         validationWindow: parseInt(currentTimestamp) - parseInt(messageData.requestTimestamp),
                         "messageSignature": "valid"

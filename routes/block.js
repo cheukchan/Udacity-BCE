@@ -15,36 +15,38 @@ exports.plugin = {
             method: "POST",
             path: "/block",
             handler: async (request, h) => {
-                if(!request.payload.address || !request.payload.star){
+                if(!request.payload.address || 
+                    !request.payload.star || 
+                    !request.payload.star.dec || 
+                    !request.payload.star.ra) {
                   	return Boom.preconditionFailed("Request body cannot be empty!");
                 }
-                const requestPayload = {
-                  	address: request.payload.address,
-                  	star: request.payload.star
-				}
+
+                address = request.payload.address;
+                star = request.payload.star;
 				
-				const messageData = await messageChain.findMessageData(requestPayload.address)
+				const messageData = await messageChain.findMessageData(address)
 				
 				if(!messageData) return Boom.notFound('This address does not exist in our records!')
 				if(!messageData.registerStar) return Boom.unauthorized('Your address has not authorized yet!')
 	
 				
                 const { story } = requestPayload.star
-                const storyLength = story.trim().split(' ').length
                 const storyBuf = Buffer.from(story).length
             
-                if(storyLength > 250 || storyBuf > 500){
+                if(storyBuf > 500){
                   	return Boom.preconditionFailed("The story of the star cannot be more 250 words or 500 bytes")
 				}
             
                 try {
-                  const body = {
-					address: requestPayload.address,
-                    star: requestPayload.star,
-                  }
-					body.star.story = new Buffer(story).toString('hex')
+                    const body = {
+					    address,
+                        star,
+                    };
+				    body.star.story = new Buffer(story).toString('hex')
 					const newBlock = new Block(body);
-					let blockData = await blockchain.addBlock(newBlock);
+                    let blockData = await blockchain.addBlock(newBlock);
+                    messageChain.findAndDeleteMessage(address)
 					return h.response(blockData).created();
                 } catch (err) {
 					return Boom.badRequest(err);
