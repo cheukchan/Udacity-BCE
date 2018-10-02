@@ -47,7 +47,7 @@ exports.plugin = {
                     registerStar: true,
                     status: {
                         address: messageData.address,
-                        requestTimestamp: 300 - (currentTimestamp - messageData.requestTimestamp),
+                        requestTimestamp: messageData.requestTimestamp,
                         message: messageData.message,
                         validationWindow: parseInt(currentTimestamp) - parseInt(messageData.requestTimestamp),
                         "messageSignature": "valid"

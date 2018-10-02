@@ -63,6 +63,33 @@ class Blockchain {
     return data.hash;
   }
 
+  findBlocksByBlockheight(height) {
+    return new Promise(
+      (resolve, reject) => {
+        let i = 0;
+        db.createReadStream()
+          .on("data", data => {
+            console.log(data.key, "=", data.value);
+            console.log('hash' + data.value.height)
+            console.log(parseInt(height))
+            if(data.value.height === parseInt(height)){
+              resolve(data.value);
+            }
+          })
+          .on("error", err => {
+            return console.log("Unable to read data stream!", err);
+          })
+          .on("close", () => {
+            //console.log("Block #" + i);
+            resolve(null);
+          });
+      },
+      err => {
+        reject("Iam the error", err);
+      }
+    );
+  }
+
   findBlocksByAddress(address) {
     return new Promise(
       (resolve, err) => {
