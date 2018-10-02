@@ -2,7 +2,7 @@ const Boom = require("boom");
 
 const { Blockchain } = require("../blockchain");
 const { Block } = require("../block")
-
+const { hexToString } = require("../helpers/hexToString")
 const blockchain = new Blockchain();
 
 exports.plugin = {
@@ -19,7 +19,9 @@ exports.plugin = {
                 const { hash } = request.params
           
                 let result = await blockchain.findBlocksByHash(hash).then(data => data)
-              
+                result.body.star["storyDecoded"] = hexToString(result.body.star.story)
+
+                //console.log(result)
                 if(!result){
                     return Boom.notFound(`Sorry, unable to find the hash or its data with this hash ${hash}`)
                 }

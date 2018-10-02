@@ -31,7 +31,7 @@ exports.plugin = {
 				if(!messageData.registerStar) return Boom.unauthorized('Your address has not authorized yet!')
 	
 				
-                const { story } = requestPayload.star
+                const { story } = star
                 const storyBuf = Buffer.from(story).length
             
                 if(storyBuf > 500){
