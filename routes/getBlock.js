@@ -17,8 +17,11 @@ exports.plugin = {
                 console.log("bbbb" + BLOCK_HEIGHT)
                 
                 let result = await blockchain.findBlocksByBlockheight(BLOCK_HEIGHT);
-                result.body.star["storyDecoded"] = hexToString(result.body.star.story);
-                console.log(result)
+
+                if(!typeof result.body.star){
+                    result.body.star["storyDecoded"] = hexToString(result.body.star.story);
+                }
+
                 if (!result) {
                     return Boom.notFound("Unable to find blockheight");
                 }  
