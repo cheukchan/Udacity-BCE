@@ -39,9 +39,9 @@ exports.plugin = {
                     
                 let newValidatedObj = {};
 
-                // if(!bitcoinMessage.verify(messageData.message, messageData.address, messageSignature.signature)){
-                //     return Boom.unauthorized('You message or your address is illegal')
-                // }
+                if(!bitcoinMessage.verify(messageData.message, messageData.address, messageSignature.signature)){
+                    return Boom.unauthorized('You message or your address is illegal')
+                }
 
                 newValidatedObj = {
                     registerStar: true,
